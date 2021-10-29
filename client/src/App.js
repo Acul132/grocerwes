@@ -3,9 +3,9 @@ import React from "react";
 import LoginPage from "./components/LoginPage"
 import MyLists from "./components/MyLists/MyLists"
 import Header from "./components/Header"
-import {AuthProvider} from "./Auth"
 import PrivateRoute from "./PrivateRoute"
-import {getAuth} from "firebase/auth"
+import {Provider} from "react-redux"
+import { store } from "./state/store"
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,15 +15,11 @@ import {ToastContainer} from "react-toastify"
 
 function App() {
 
-  const handleLogout = () => {
-    getAuth().signOut()
-  }
-
     return (
-      <AuthProvider>
+      <Provider store={store}>
         <Router>
           <div style={{height: "100%", display: "flex", "flexDirection":"column"}}>
-            <Header handleLogout={handleLogout}/>
+            <Header />
     
             <PrivateRoute exact path="/lists" component={MyLists}/>
             <PrivateRoute exact path="/homes" component={Homes}/>
@@ -34,7 +30,7 @@ function App() {
             <ToastContainer position="bottom-right"/>
           </div>
         </Router>
-      </AuthProvider>
+      </Provider>
       );
   
 }

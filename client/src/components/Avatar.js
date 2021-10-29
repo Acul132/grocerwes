@@ -1,9 +1,8 @@
-import {useContext} from "react"
-import {AuthContext} from "../Auth"
 import {Link} from "react-router-dom"
+import {useSelector} from "react-redux"
 
 const Avatar = () => {
-    const {currentUser} = useContext(AuthContext)
+    const currentUser = useSelector((state) => state.user)
 
     const avatarName = (displayName) => {
         console.log(currentUser)

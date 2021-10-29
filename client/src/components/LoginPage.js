@@ -1,11 +1,15 @@
-import {useState, useContext} from "react"
-import {AuthContext} from "../Auth"
+import {useState} from "react"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {Redirect} from "react-router-dom"
 import {FcGoogle} from "react-icons/fc"
+import {useSelector, useDispatch} from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../state/index"
 
 const LoginPage = ({history}) => {
-    const currentUser = useContext(AuthContext)
+    const currentUser = useSelector((state) => state.user)
+    const dispatch = useDispatch()
+    const {setUser, removeUser} = bindActionCreators(actionCreators, dispatch)
     
     const handleGoogleLogin = () => {
         const auth = getAuth()
@@ -17,6 +21,8 @@ const LoginPage = ({history}) => {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
+            console.log(user)
+            setUser(user)
             history.push("/")
         }).catch((error) => {
             const errorCode = error.code;

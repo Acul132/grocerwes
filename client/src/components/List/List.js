@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useContext} from "react"
+import React, {useState, useEffect} from "react"
+import {useSelector} from "react-redux"
 import ListRow from "./ListRow"
 import ListForm from "./ListForm"
 import {v4 as uuidv4} from "uuid"
 import {toast} from "react-toastify"
 import {BiArrowBack} from 'react-icons/bi'
-import {AuthContext} from "../../Auth"
 import axios from "axios"
 import url from "../../config/url"
 
 const List = ({closeList, list = {id:"1",rows:[]}}) => {
     //{id, value, completed}
     const [listItems, setListItems] = useState(list.rows || [])
-    const {currentUser} = useContext(AuthContext)
+    const currentUser = useSelector((state) => state.user)
     const isHomeList = (list.id === "1") ? true : false
 
     useEffect(() => {

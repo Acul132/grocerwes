@@ -1,6 +1,6 @@
-import {useState, useEffect, useContext, useRef} from "react"
+import {useState, useEffect, useRef} from "react"
+import {useSelector} from "react-redux"
 import {FaSpinner} from "react-icons/fa"
-import {AuthContext} from "../../Auth"
 import axios from "axios"
 import CreateListModal from "../modals/CreateListModal"
 import ImportListModal from "../modals/ImportListModal"
@@ -28,7 +28,7 @@ const MyLists = () => {
     const [isListCreationOpen, setIsListCreationOpen] = useState(false)
     const [isLoading, setIsloading] = useState(false)
     const [isImportListOpen, setIsImportListOpen] = useState(false)
-    const {currentUser} = useContext(AuthContext)
+    const currentUser = useSelector((state) => state.user)
     const isMounted = useIsMounted()
 
     const handleToggleSelectedList = (list) => {

@@ -1,11 +1,21 @@
 import {Link} from "react-router-dom"
-import {AuthContext} from "../Auth"
-import {useContext, useState} from "react"
+import {useState} from "react"
 import Avatar from "./Avatar"
+import { bindActionCreators } from "redux"
+import { useSelector, useDispatch } from "react-redux"
+import { actionCreators } from "../state/index"
+import { getAuth } from "firebase/auth";
 
-const Header = ({isSignedIn=false, handleLogout}) => {
-    const {currentUser} = useContext(AuthContext)
+const Header = ({isSignedIn=false}) => {
+    const currentUser = useSelector((state) => state.user)
     const [selected, setSelected] = useState("")
+    const dispatch = useDispatch()
+    const {removeUser} = bindActionCreators(actionCreators, dispatch)
+
+    const handleLogout = () => {
+        getAuth().signOut()
+        removeUser({})
+    }
 
     const loggedInElements = <>
         <li>
