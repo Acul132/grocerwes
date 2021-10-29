@@ -26,7 +26,7 @@ function App() {
             <Header handleLogout={handleLogout}/>
     
             <PrivateRoute exact path="/lists" component={MyLists}/>
-            <PrivateRoute exact path="/homes" component={Users}/>
+            <PrivateRoute exact path="/homes" component={Homes}/>
             <PrivateRoute exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/" component={Home}/>
@@ -47,12 +47,16 @@ function Home() {
       );
   }
   
-  function Users() {
-    return <h2>Users</h2>;
+  function Homes() {
+    return <div className="homes-container">
+        <h2>Coming soon...</h2>
+      </div>;
   }
 
   function Profile() {
-    return <h2>Profile</h2>
+    return <div className="profile-container">
+        <h2>Coming soon...</h2>
+      </div>;
   }
 
 export default App;
